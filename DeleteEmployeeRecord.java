@@ -12,13 +12,10 @@ public class DeleteEmployeeRecord {
     System.out.print("Enter Employee ID to delete: ");
     int empId = sc.nextInt();
 
-    // Load the MySQL driver
     Class.forName("com.mysql.cj.jdbc.Driver");
 
-    // Establish connection
     Connection con = DriverManager.getConnection(url, user, password);
 
-    // Delete query
     String deleteQuery = "DELETE FROM employee WHERE emp_id = ?";
     PreparedStatement pstmt = con.prepareStatement(deleteQuery);
     pstmt.setInt(1, empId);
@@ -30,7 +27,6 @@ public class DeleteEmployeeRecord {
       System.out.println("No record found with Employee ID: " + empId);
     }
 
-    // Display remaining records
     String selectQuery = "SELECT * FROM employee";
     Statement stmt = con.createStatement();
     ResultSet rs = stmt.executeQuery(selectQuery);
@@ -46,7 +42,6 @@ public class DeleteEmployeeRecord {
       System.out.println("ID: " + id + ", Name: " + name + ", Dept: " + dept + ", Salary: " + salary);
     }
 
-    // Close resources
     rs.close();
     stmt.close();
     pstmt.close();
